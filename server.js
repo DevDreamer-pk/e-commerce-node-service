@@ -15,6 +15,7 @@ import loggerMiddleware from "./src/middlewares/logger.middleware.js";
 import ApplicationError from "./src/error-handler/applicationError.js";
 import {connectToMongoDB} from "./src/config/mongoose.Config.js";
 import orderRouter from "./src/features/order/order.routes.js";
+import rabbitMQConsumer from "./src/middlewares/rabbitmq.consumer.js";
 
 
 const server = experss();
@@ -50,7 +51,8 @@ server.use((req,res) => {
 })
 
 
-server.listen(3000, () => {
-    console.log("Listening on port 3000"); 
+server.listen(4000, () => {
+    console.log("Listening on port 4000"); 
     connectToMongoDB();
+    rabbitMQConsumer();
 })
